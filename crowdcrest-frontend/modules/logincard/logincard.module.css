@@ -1,0 +1,17 @@
+.login{
+    border-color: black;
+    border: 2px groove;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    text-align: center;
+    
+} 
+
+
+.loginH{
+    justify-content: center;
+    text-align: center;
+}

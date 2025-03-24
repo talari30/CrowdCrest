@@ -1,0 +1,15 @@
+.input {
+    width: fit-content;
+    padding: var(--spacing-1);
+    padding-right: var(--spacing-3);
+    border: 1.5px solid black;
+    border-radius: var(--spacing-half);
+    font-family: "Nunito", sans-serif;
+    outline: none;
+  }
+  
+  .input:focus {
+    border: 1px solid black;
+    outline: none;
+  }
+  
