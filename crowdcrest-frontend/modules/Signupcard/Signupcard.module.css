@@ -1,0 +1,18 @@
+.signup{
+    border-color: black;
+    border: 2px groove;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 300px;
+    height: 250px;
+    margin: 0 auto;
+    text-align: center;
+    background: lightblue;
+    
+} 
+
+
+.loginH{
+    justify-content: center;
+    text-align: center;
+}
