@@ -1,0 +1,19 @@
+.Pageheader{
+    display: flex;
+    border: 2px groove rgb(204, 147, 78);
+    align-items: center; 
+    justify-content: space-between;
+    background-color: rgb(204, 147, 78);
+    
+  
+}
+
+.right {
+    display: flex;    
+    gap: 3rem;        
+    padding-right: 30px;
+    
+  }
+.left{
+    padding-left: 30px;
+}

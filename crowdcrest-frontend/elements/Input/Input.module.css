@@ -6,10 +6,12 @@
     border-radius: var(--spacing-half);
     font-family: "Nunito", sans-serif;
     outline: none;
+    background-color: white;
   }
   
   .input:focus {
     border: 1px solid black;
+    background-color: white;
     outline: none;
   }
   

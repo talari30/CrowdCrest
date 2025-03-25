@@ -1,13 +1,9 @@
+import { redirect } from "next/navigation";
 
-import LoginProps from "@/modules/logincard";
-
-
-export const login=  ()=>{
-        return (<LoginProps placeholder_uid="username" placeholder_password="password"/> );
-
+export default function Home() {
+  // Immediately redirect to /login on the server side
+  redirect("/login");
 }
-export default login;
-
 
 
 
