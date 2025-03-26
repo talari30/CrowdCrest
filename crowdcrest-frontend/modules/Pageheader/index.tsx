@@ -11,8 +11,8 @@ export const Pageheader = (): JSX.Element => {
         </div>
         <div className={styles.right}>
         <Hlink linker="">Home</Hlink>
-          <Hlink linker="">Aboutus</Hlink>
-          <Hlink linker="">Contactus</Hlink>
+          <Hlink linker="">About Us</Hlink>
+          <Hlink linker="http://localhost:3000/Contactus">Contact Us</Hlink>
           <Hlink linker="">User</Hlink>
         </div>
       </div>
