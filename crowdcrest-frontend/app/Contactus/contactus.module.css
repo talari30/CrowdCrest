@@ -1,10 +1,12 @@
 .infoRow {
-    display: flex;
+
     align-items: center;
-    gap: 0.5rem;
+    gap: 2rem;
     margin-top: 1rem;
   }
   .info{
+    justify-content: center;
     display: flex;
+    gap: 20rem;
   }
 
