@@ -1,0 +1,25 @@
+.Ocardbox{
+   border-radius: 20px;
+    border: 1px solid black;
+   height: 150px;
+   width: 1400px;
+   margin-left: 40px;
+   margin-right: 40px;
+   background-color: rgb(108, 185, 108);
+   
+}
+
+.Icardbox{
+    padding: 10px;
+    display: flex;
+    height: 80px;
+   width: 1400px;
+   
+   justify-content: space-between;
+    border-bottom: 1px solid black;
+ 
+}
+
+.content{
+    padding: 10px;
+}

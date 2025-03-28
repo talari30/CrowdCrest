@@ -1,6 +1,10 @@
 .content {
+    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 1rem;
   }
 .head{
+    margin-left: 20px;
+    margin-right: 10px;
     margin-top: 0.5rem; 
 }

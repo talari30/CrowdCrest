@@ -1,9 +1,10 @@
 .Pageheader{
     display: flex;
-    border: 2px groove rgb(143, 48, 143);
+    border: 2px solid rgb(190, 93, 93);
+    border-bottom: 1px solid black;
     align-items: center; 
     justify-content: space-between;
-    background-color: rgb(143, 48, 143);
+    background-color: rgb(190, 93, 93);
     height: 50px;
   
 }

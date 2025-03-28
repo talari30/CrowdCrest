@@ -15,7 +15,7 @@ const Signup = (props: LoginProps): JSX.Element => {
   
     return (
       <div className={styles.signup}>
-        <div className={styles.loginH}><Heading size={3} >Login</Heading></div>
+        <div className={styles.loginH}><Heading size={3} >Sign up</Heading></div>
         <div >
           <Text>Username</Text>
           <Input type="email" placeholder={placeholder_uid} id={"1"} name={"user"} />

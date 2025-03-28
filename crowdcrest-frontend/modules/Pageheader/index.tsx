@@ -10,7 +10,7 @@ export const Pageheader = (): JSX.Element => {
           <Text>CrowdCrest</Text>
         </div>
         <div className={styles.right}>
-        <Hlink linker="">Home</Hlink>
+        <Hlink linker="http://localhost:3000/Home">Home</Hlink>
           <Hlink linker="http://localhost:3000/Aboutus">About Us</Hlink>
           <Hlink linker="http://localhost:3000/Contactus">Contact Us</Hlink>
           <Hlink linker="">User</Hlink>

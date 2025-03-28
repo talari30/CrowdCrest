@@ -5,11 +5,13 @@ import {Text} from "@/elements/Text";
 import phoneImg from "@/assets/Phoneimg.png";
 import mailImg from "@/assets/Mailimg.png";
 import Image from "next/image";
+import {Ocard} from "@/modules/Organization_card";
 
 
 
 export const CContactus = () => {
         return (
+                <>
           <div >
          
               <div>
@@ -42,6 +44,8 @@ export const CContactus = () => {
               </div>
          
           </div>
+          
+          </>
         );
       };
 export default CContactus;
