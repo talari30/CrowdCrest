@@ -7,12 +7,14 @@ interface Ocardpropy{
     name_of_organizer: string;
     members:number;
     Target: number;
+    Amount_recieved:number;
+    Amount_left:number;
     deadline:string;
     children: ReactNode;
     
 }
 export const Ocard=(props: Ocardpropy): JSX.Element=>{
-    const{name_of_organization,name_of_organizer,members,Target, deadline,children}=props;
+    const{name_of_organization,name_of_organizer,members,Target,Amount_recieved,Amount_left, deadline,children}=props;
 
     return (
         <div className={styles.Ocardbox}>
@@ -24,9 +26,11 @@ export const Ocard=(props: Ocardpropy): JSX.Element=>{
                    </div>
                    <div className={styles.members}>
                    <Text>Target: {Target}</Text>
+                   <Text>Amount recieved: {Amount_recieved}</Text>
                    </div>
                    <div className={styles.members}>
                    <Text>Deadline: {deadline}</Text>
+                   <Text>Amount left: {Amount_left}</Text>
                    </div>
                    <div className={styles.members}>
                    <Text>Number of backers: {members}</Text>
