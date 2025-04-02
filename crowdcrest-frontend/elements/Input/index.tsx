@@ -13,7 +13,7 @@ interface IInputProps {
     placeholder?: string;
     required?: boolean;
     readOnly?: boolean;
-    onClickAction?: () => void;
+    onChangeAction?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   }
   import React, { forwardRef } from "react";
 
@@ -28,7 +28,7 @@ interface IInputProps {
         placeholder = "",
         required = false,
         readOnly = false,
-        onClickAction,
+        onChangeAction,
       } = props;
   
       return (
@@ -43,7 +43,7 @@ interface IInputProps {
             placeholder={type !== "checkbox" ? placeholder : ""}
             required={required}
             readOnly={readOnly}
-            onClick={onClickAction}
+            onChange={onChangeAction}
           />
           {type === "checkbox" && <label htmlFor={id}>{placeholder}</label>}
         </div>
