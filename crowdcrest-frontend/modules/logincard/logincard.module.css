@@ -4,7 +4,7 @@
     padding: 1rem;
     border-radius: 10px;
     width: 300px;
-    height: 200px;
+    height: 210px;
     margin: 0 auto;
     text-align: center;
     background: lightblue
@@ -16,3 +16,17 @@
     justify-content: center;
     text-align: center;
 }
+.button_login{
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 7px;
+    border: 1px black solid;
+   
+    width: 100px;
+
+    background-color: white;
+}
+.button_login:hover {
+    background-color: #eee; 
+    color: #000; 
+  }

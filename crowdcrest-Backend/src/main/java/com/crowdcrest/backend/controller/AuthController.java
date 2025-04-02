@@ -1,6 +1,7 @@
 package com.crowdcrest.backend.controller;
 
 import com.crowdcrest.backend.dto.SignupRequest;
+import com.crowdcrest.backend.dto.LoginRequest;
 import com.crowdcrest.backend.entity.Member;
 import com.crowdcrest.backend.repository.MemberRepository;
 import lombok.extern.log4j.Log4j2;
@@ -52,12 +53,19 @@ public class AuthController {
         return ResponseEntity.ok("User registered successfully");
     }
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody SignupRequest signupRequest) {
-        // Optional: check if a user with the same email already exists.
-//        log.info("hi iam rahul");
-        if (memberRepository.findByEmail(signupRequest.getEmail()) == null) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        log.info("Hel");
+        if (memberRepository.findByEmail(loginRequest.getEmail()) == null ) {
 
             return ResponseEntity.badRequest().body("No account with this Email");
+        }
+        Member member = memberRepository.findByEmail(loginRequest.getEmail());
+        boolean matches = passwordEncoder.matches(loginRequest.getPassword(), member.getPassword());
+        log.info("User typed password: {} | Stored password: {}",
+                loginRequest.getPassword(), member.getPassword());
+
+        if (!matches ) {
+            return ResponseEntity.badRequest().body("wrong password");
         }
 
         return ResponseEntity.ok("User log in successful");

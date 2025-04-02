@@ -5,10 +5,6 @@ import styles from "./Signup.module.css";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-interface signup{
-
-}
-
 export const SSignup=  ()=>{
         const router = useRouter();
         const [email, setEmail] = useState("");
