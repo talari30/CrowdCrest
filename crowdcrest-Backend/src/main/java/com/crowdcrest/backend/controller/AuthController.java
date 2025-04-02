@@ -3,17 +3,15 @@ package com.crowdcrest.backend.controller;
 import com.crowdcrest.backend.dto.SignupRequest;
 import com.crowdcrest.backend.entity.Member;
 import com.crowdcrest.backend.repository.MemberRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
 
 @RestController
 @RequestMapping("/auth")
+@Log4j2
 public class AuthController {
 
     @Autowired
@@ -22,14 +20,14 @@ public class AuthController {
     // Inject a PasswordEncoder bean to hash passwords.
     @Autowired
     private PasswordEncoder passwordEncoder;
-    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
+//    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignupRequest signupRequest) {
         // Optional: check if a user with the same email already exists.
-        log.info("hi iam rahul");
-        if (memberRepository.findByEmail(signupRequest.getEmail()) != null) {
 
+        if (memberRepository.findByEmail(signupRequest.getEmail()) != null) {
+            log.info("Hello");
             return ResponseEntity.badRequest().body("Email is already in use");
         }
 
@@ -45,8 +43,8 @@ public class AuthController {
         newMember.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
 
         // Save to the database
-        log.info("Saving new user with email: {}", newMember.getEmail());
-        log.debug("Debugging info...");
+//        log.info("Saving new user with email: {}", newMember.getEmail());
+//        log.debug("Debugging info...");
 
 
         memberRepository.save(newMember);
@@ -56,7 +54,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody SignupRequest signupRequest) {
         // Optional: check if a user with the same email already exists.
-        log.info("hi iam rahul");
+//        log.info("hi iam rahul");
         if (memberRepository.findByEmail(signupRequest.getEmail()) == null) {
 
             return ResponseEntity.badRequest().body("No account with this Email");

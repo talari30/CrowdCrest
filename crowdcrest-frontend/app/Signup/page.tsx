@@ -3,6 +3,10 @@ import {Pageheader} from "@/modules/Pageheader";
 import styles from "./Signup.module.css";
 
 
+interface signup{
+
+}
+
 export const SSignup=  ()=>{
         return (
             <div className={styles.container}>

@@ -16,3 +16,19 @@
     justify-content: center;
     text-align: center;
 }
+
+.button_createaccount{
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 7px;
+    border: 1px black solid;
+   
+    width: 150px;
+
+    background-color: white;
+}
+
+.button_createaccount:hover {
+    background-color: #eee; 
+    color: #000; 
+  }

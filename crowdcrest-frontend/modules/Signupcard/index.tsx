@@ -25,6 +25,9 @@ const Signup = (props: LoginProps): JSX.Element => {
           <Input type="password" placeholder={placeholder_password} id={"2"} name={"user3"} />
           
         </div>
+        <div className={styles.button_createaccount}>
+            <Button id="Signup" type="submit"> Create account</Button>
+            </div>
       </div>
     );
   };
