@@ -10,18 +10,19 @@ interface Ocardpropy{
     Amount_recieved:number;
     Amount_left:number;
     deadline:string;
-    children: ReactNode;
+    about:string;
+    
     
 }
 export const Ocard=(props: Ocardpropy): JSX.Element=>{
-    const{name_of_organization,name_of_organizer,members,Target,Amount_recieved,Amount_left, deadline,children}=props;
+    const{name_of_organization,name_of_organizer,members,Target,Amount_recieved,Amount_left, deadline,about}=props;
 
     return (
         <div className={styles.Ocardbox}>
             <div >
                 <div className={styles.Icardbox}>
                     <div>
-                    <Heading>Organization:{name_of_organization}</Heading>
+                    <Heading>{name_of_organization}</Heading>
                     <Text>Organizer: {name_of_organizer}</Text>
                    </div>
                    <div className={styles.members}>
@@ -46,7 +47,7 @@ export const Ocard=(props: Ocardpropy): JSX.Element=>{
 
             </div>
             <div className={styles.content}>
-             <Text> {children} </Text> 
+             <Text> {about} </Text> 
             </div>
 
 

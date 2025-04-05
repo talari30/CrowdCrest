@@ -21,7 +21,8 @@ public class AppConfig {
                         .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(Customizer.withDefaults());
+                .httpBasic(Customizer.withDefaults())        // 🧪 Enables testing with Postman
+                .formLogin(form -> form.disable());
 
         return http.build();
     }

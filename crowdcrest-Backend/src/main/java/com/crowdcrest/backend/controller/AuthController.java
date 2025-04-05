@@ -2,13 +2,19 @@ package com.crowdcrest.backend.controller;
 
 import com.crowdcrest.backend.dto.SignupRequest;
 import com.crowdcrest.backend.dto.LoginRequest;
+import com.crowdcrest.backend.entity.Donation;
 import com.crowdcrest.backend.entity.Member;
+import com.crowdcrest.backend.repository.DonationRepository;
 import com.crowdcrest.backend.repository.MemberRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -70,4 +76,34 @@ public class AuthController {
 
         return ResponseEntity.ok("User log in successful");
     }
+    @Autowired
+    private DonationRepository donationRepository;
+
+    @GetMapping("/home")
+
+    public ResponseEntity<?> home() {
+        log.info("Fetching all donations");
+
+        List<Donation> allDonations = donationRepository.findAll();
+
+        List<Map<String, Object>> donationList = allDonations.stream().map(donation -> {
+            Member member = memberRepository.findById(donation.getOrganizer().getId()).orElse(null);
+            String name = member != null
+                    ? member.getFirstName() + " " + member.getLastName()
+                    : "Unknown";
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("donationId", donation.getDonationId());
+            map.put("fundName", donation.getFundName());
+            map.put("target", donation.getTarget());
+            map.put("deadline", donation.getDeadline());
+            map.put("about", donation.getAbout());
+            map.put("organizerName", name);
+
+            return map;
+        }).toList();
+
+        return ResponseEntity.ok(donationList);
+    }
 }
+
