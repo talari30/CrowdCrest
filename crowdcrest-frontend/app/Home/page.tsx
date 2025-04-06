@@ -4,14 +4,17 @@ import styles from "./Home.module.css";
 import {Ocard} from "@/modules/Organization_card";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {Button} from "@/elements/Button"
 
 interface Donation {
       donationId: number;
       fundName: string;
       target: number;
       deadline: string;
-      about: string;
+      info: string;
+      about:string;
       organizerName: string;
+
     }
 
 
@@ -46,11 +49,16 @@ export const Hhome = () => {
             Amount_recieved={0} // You can replace this with actual data if available
             Amount_left={donation.target} // Or calculate based on received
             deadline={donation.deadline}
+            info={donation.info}
             about={donation.about}
+
           >
                
           </Ocard>
           ))}
+          </div>
+          <div className={styles.addnew}>
+            <Button id="Add New" type="button"> Add New</Button>
           </div>
           </>
         );

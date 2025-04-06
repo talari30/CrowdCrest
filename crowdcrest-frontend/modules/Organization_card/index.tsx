@@ -15,12 +15,13 @@ interface Ocardpropy{
     Amount_recieved:number;
     Amount_left:number;
     deadline:string;
+    info:string;
     about:string;
     
     
 }
 export const Ocard=(props: Ocardpropy): JSX.Element=>{
-    const{donationId,name_of_organization,name_of_organizer,members,Target,Amount_recieved,Amount_left, deadline,about}=props;
+    const{donationId,name_of_organization,name_of_organizer,members,Target,Amount_recieved,Amount_left, deadline,info, about}=props;
     const router = useRouter();
 
     const handleViewFund = () => {
@@ -58,7 +59,7 @@ export const Ocard=(props: Ocardpropy): JSX.Element=>{
             </div>
             <div className={styles.content}>
                 <div>
-             <Text> {about} </Text> 
+             <Text> {info} </Text> 
              </div>
              <div className={styles.button} >
                    <Button id="donate" type="submit" onClickAction={handleViewFund}> Help Us!</Button>

@@ -16,6 +16,7 @@ public class Donation {
     private String fundName;
     private Double target;
     private LocalDate deadline;
+    private String info;
     private String about;
 
     @ManyToOne

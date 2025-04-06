@@ -98,6 +98,7 @@ public class AuthController {
             map.put("target", donation.getTarget());
             map.put("deadline", donation.getDeadline());
             map.put("about", donation.getAbout());
+            map.put("info", donation.getInfo());
             map.put("organizerName", name);
 
             return map;
