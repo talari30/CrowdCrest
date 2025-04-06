@@ -12,7 +12,7 @@ interface Hlink{
 export const Hlink=({ linker, children }: Hlink): JSX.Element=>{
     
     return (
-        <a href={linker} className={styles.Hlink} target="_blank" rel="noopener noreferrer">
+        <a href={linker} className={styles.Hlink} rel="noopener noreferrer">
          {children}
         </a>
       );

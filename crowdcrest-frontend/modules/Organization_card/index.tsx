@@ -1,8 +1,13 @@
+'use client'
 import {Text} from "@/elements/Text";
 import {Heading} from "@/elements/Heading";
+import {Button} from "@/elements/Button";
 import { Children, JSX, ReactNode } from "react";
 import styles from "./Organization_card.module.css"
+import { useRouter } from "next/navigation";
+
 interface Ocardpropy{
+    donationId: number;
     name_of_organization: string;
     name_of_organizer: string;
     members:number;
@@ -15,8 +20,12 @@ interface Ocardpropy{
     
 }
 export const Ocard=(props: Ocardpropy): JSX.Element=>{
-    const{name_of_organization,name_of_organizer,members,Target,Amount_recieved,Amount_left, deadline,about}=props;
+    const{donationId,name_of_organization,name_of_organizer,members,Target,Amount_recieved,Amount_left, deadline,about}=props;
+    const router = useRouter();
 
+    const handleViewFund = () => {
+        router.push(`/Fund?donationId=${donationId}&fundName=${encodeURIComponent(name_of_organization)}&organizer=${encodeURIComponent(name_of_organizer)}&target=${Target}&about=${encodeURIComponent(about)}&deadline=${deadline}`);
+    };
     return (
         <div className={styles.Ocardbox}>
             <div >
@@ -35,6 +44,7 @@ export const Ocard=(props: Ocardpropy): JSX.Element=>{
                    </div>
                    <div className={styles.members}>
                    <Text>Number of backers: {members}</Text>
+                   
                    </div>
                 </div>
                 <div>
@@ -47,7 +57,12 @@ export const Ocard=(props: Ocardpropy): JSX.Element=>{
 
             </div>
             <div className={styles.content}>
+                <div>
              <Text> {about} </Text> 
+             </div>
+             <div className={styles.button} >
+                   <Button id="donate" type="submit" onClickAction={handleViewFund}> Help Us!</Button>
+                   </ div>
             </div>
 
 

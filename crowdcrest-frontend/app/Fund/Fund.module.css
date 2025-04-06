@@ -1,0 +1,22 @@
+.funder{
+    display:flex;
+}
+.about{
+   
+    width: 1000px;
+}
+.button{
+    text-align: center;
+    margin-left: 650px;
+    
+    border: 1px black solid;
+    margin-top: 7px;
+    width: 100px;
+
+    background-color: white;
+}
+.button:hover {
+   
+    background-color: grey; 
+    color: #000; 
+  }

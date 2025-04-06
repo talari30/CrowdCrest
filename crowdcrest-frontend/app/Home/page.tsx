@@ -1,10 +1,10 @@
 'use client'
 import {Pageheader} from "@/modules/Pageheader";
 import styles from "./Home.module.css";
-
 import {Ocard} from "@/modules/Organization_card";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 interface Donation {
       donationId: number;
       fundName: string;
@@ -37,7 +37,8 @@ export const Hhome = () => {
           <div className={styles.card}>
           {donations.map((donation) => (
           <Ocard
-           key={donation.donationId}
+            key={donation.donationId}
+            donationId={donation.donationId}
             name_of_organization={donation.fundName}
             name_of_organizer={donation.organizerName}
             members={100}
