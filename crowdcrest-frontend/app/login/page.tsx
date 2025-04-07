@@ -11,30 +11,33 @@ export const login=  ()=>{
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
         const handleSignup = async () => {
-               
-                try {   
-                        
-                        const response = await fetch("http://localhost:8080/auth/login", {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({
-                            email,
-                            password,
-                          }),
-                        });
-                  
-                        if (response.ok) {
-                          alert("Login Successful");
-                          router.push("/Home");
-                        } else {
-                          const errorMsg = await response.text();
-                          alert(`Signup failed: ${errorMsg}`);
-                        }
-                      } catch (err) {
-                        console.error("Error:", err);
-                        alert("An error occurred during Login.");
+                try {
+                  const response = await fetch("http://localhost:8080/auth/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      email,
+                      password,
+                    }),
+                  });
+              
+                  if (response.ok) {
+                        const data = await response.json();
+                        localStorage.setItem("token", data.token);
+                        localStorage.setItem("memberId", data.memberId);
+                        alert("Login Successful");
+                        router.push("/Home");
                       }
-                    };
+                       else {
+                    const errorMsg = await response.text();
+                    alert(`Login failed: ${errorMsg}`);
+                  }
+                } catch (err) {
+                  console.error("Error:", err);
+                  alert("An error occurred during Login.");
+                }
+              };
+              
         return (
             <div className={styles.container}>
         <><div>

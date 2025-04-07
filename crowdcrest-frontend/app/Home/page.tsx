@@ -5,6 +5,7 @@ import {Ocard} from "@/modules/Organization_card";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {Button} from "@/elements/Button"
+import { useRouter } from "next/navigation";
 
 interface Donation {
       donationId: number;
@@ -19,6 +20,7 @@ interface Donation {
 
 
 export const Hhome = () => {
+      const router= useRouter();
       const [donations, setDonations] = useState<Donation[]>([]);
       useEffect(() => {
             axios.get("http://localhost:8080/auth/home")
@@ -30,7 +32,9 @@ export const Hhome = () => {
                 console.error("Error fetching donations", error);
               });
           }, []);
-          
+          const newPageopener=async ()=>{
+            router.push("/Newfund");
+          }
 
         return (
             <>
@@ -58,7 +62,7 @@ export const Hhome = () => {
           ))}
           </div>
           <div className={styles.addnew}>
-            <Button id="Add New" type="button"> Add New</Button>
+            <Button id="Add New" type="button" onClickAction={newPageopener}> + Add New</Button>
           </div>
           </>
         );

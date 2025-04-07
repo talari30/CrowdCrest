@@ -8,7 +8,7 @@ interface IInputProps {
     className?: string;
     name: string;
     ref?: RefObject<HTMLInputElement>;
-    type?: "text" | "number" | "email" | "password" | "checkbox";
+    type?: "text" | "number" | "email" | "password" | "checkbox"| "date";
     value?: string;
     placeholder?: string;
     required?: boolean;

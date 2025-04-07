@@ -1,7 +1,9 @@
 package com.crowdcrest.backend.controller;
 
+import com.crowdcrest.backend.Util.JwtUtil;
 import com.crowdcrest.backend.dto.SignupRequest;
 import com.crowdcrest.backend.dto.LoginRequest;
+import com.crowdcrest.backend.dto.NewFundRequest;
 import com.crowdcrest.backend.entity.Donation;
 import com.crowdcrest.backend.entity.Member;
 import com.crowdcrest.backend.repository.DonationRepository;
@@ -11,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,9 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 //    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
+    @Autowired
+    private JwtUtil jwtUtil;
+
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignupRequest signupRequest) {
@@ -58,23 +63,27 @@ public class AuthController {
 
         return ResponseEntity.ok("User registered successfully");
     }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        log.info("Hel");
-        if (memberRepository.findByEmail(loginRequest.getEmail()) == null ) {
-
+        Member member = memberRepository.findByEmail(loginRequest.getEmail());
+        if (member == null) {
             return ResponseEntity.badRequest().body("No account with this Email");
         }
-        Member member = memberRepository.findByEmail(loginRequest.getEmail());
-        boolean matches = passwordEncoder.matches(loginRequest.getPassword(), member.getPassword());
-        log.info("User typed password: {} | Stored password: {}",
-                loginRequest.getPassword(), member.getPassword());
 
-        if (!matches ) {
-            return ResponseEntity.badRequest().body("wrong password");
+        boolean matches = passwordEncoder.matches(loginRequest.getPassword(), member.getPassword());
+        if (!matches) {
+            return ResponseEntity.badRequest().body("Wrong password");
         }
 
-        return ResponseEntity.ok("User log in successful");
+        String token = jwtUtil.generateToken(member.getEmail());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Login successful");
+        response.put("token", token);
+        response.put("memberId", member.getId());
+
+        return ResponseEntity.ok(response);
     }
     @Autowired
     private DonationRepository donationRepository;
@@ -106,6 +115,29 @@ public class AuthController {
 
 
         return ResponseEntity.ok(donationList);
+    }
+    @Transactional
+    @PostMapping("/newFund")
+    public ResponseEntity<?> NewFund(@RequestBody NewFundRequest newfundrequest) {
+        Member organizer = memberRepository.findById(newfundrequest.getOrganizerId())
+                .orElse(null);
+
+        if (organizer == null) {
+            return ResponseEntity.badRequest().body("Invalid organizer ID");
+        }
+
+        // Create a new member entity and copy over the fields.
+        Donation donation = new Donation();
+        donation.setFundName(newfundrequest.getFundName());
+        donation.setTarget(newfundrequest.getTarget());
+        donation.setDeadline(newfundrequest.getDeadline());
+        donation.setAbout(newfundrequest.getAbout());
+        donation.setInfo(newfundrequest.getInfo());
+        donation.setOrganizer(organizer);  // set the actual Member object
+
+        donationRepository.save(donation);
+
+        return ResponseEntity.ok("Fund registered successfully");
     }
 }
 
