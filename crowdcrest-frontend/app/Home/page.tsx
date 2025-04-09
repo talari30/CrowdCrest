@@ -40,7 +40,11 @@ export const Hhome = () => {
             <>
             <div>
               <Pageheader />
+              
             </div>
+            <div className={styles.addnew}>
+            <Button id="Add New" type="button" onClickAction={newPageopener}> + Add New</Button>
+          </div>
           <div className={styles.card}>
           {donations.map((donation) => (
           <Ocard
@@ -61,9 +65,8 @@ export const Hhome = () => {
           </Ocard>
           ))}
           </div>
-          <div className={styles.addnew}>
-            <Button id="Add New" type="button" onClickAction={newPageopener}> + Add New</Button>
-          </div>
+          
+          
           </>
         );
       };
