@@ -1,0 +1,15 @@
+.button_start{
+     margin-left: 40px;
+     margin-bottom: 40px;
+    text-align: center;
+    margin-top: 7px;
+    border: 1px black solid;
+   
+    width: 100px;
+
+    background-color: white;
+}
+.button_start:hover {
+    background-color: #eee; 
+    color: #000; 
+  }

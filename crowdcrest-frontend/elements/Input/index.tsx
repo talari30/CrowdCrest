@@ -6,6 +6,7 @@ import { JSX, ReactNode } from "react";
 interface IInputProps {
     id: string;
     className?: string;
+    inputClassName?: string;
     name: string;
     ref?: RefObject<HTMLInputElement>;
     type?: "text" | "number" | "email" | "password" | "checkbox"| "date";
@@ -21,7 +22,7 @@ interface IInputProps {
     (props, ref): JSX.Element => {
       const {
         id,
-        className,
+        className,inputClassName,
         name = "",
         type = "text",
         value,
@@ -36,7 +37,7 @@ interface IInputProps {
           <input
             id={id}
             name={name}
-            className={styles.input}
+            className={`${styles.input} ${inputClassName || ""}`} 
             ref={ref}
             type={type}
             value={value}

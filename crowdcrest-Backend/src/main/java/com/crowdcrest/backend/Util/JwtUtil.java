@@ -15,6 +15,7 @@ public class JwtUtil {
     private final String SECRET_KEY = "mysecretkeymysecretkeymysecretkey"; // at least 256-bit
     private final long EXPIRATION_TIME = 86400000; // 1 day in ms
 
+
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
     public String generateToken(String email) {

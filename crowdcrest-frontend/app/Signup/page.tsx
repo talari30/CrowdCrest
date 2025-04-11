@@ -33,6 +33,10 @@ export const SSignup=  ()=>{
                 });
           
                 if (response.ok) {
+                 
+                  const data = await response.json();
+                  localStorage.setItem("token", data.token);
+                  localStorage.setItem("memberId", data.memberId);
                   alert("Account created successfully!");
                   router.push("/Home");
                 } else {

@@ -41,8 +41,8 @@ const Nnew = ({
   };
   
     return (
-      <form onSubmit={handleSubmit}  className={styles.login}>
-        <div className={styles.loginH}><Heading size={3} >Login</Heading></div>
+      <form onSubmit={handleSubmit}  className={styles.funding}>
+        <div className={styles.fundH}><Heading size={3} >Start New Fund</Heading></div>
         <div >
             <div>
             <Text>Fundname:</Text>
@@ -58,15 +58,13 @@ const Nnew = ({
           </div>
           <div>
           <Text>info:</Text>
-          <Input type="text" placeholder={"info"} id={"4"} name={"target"} onChangeAction={(e) => setinfo(e.target.value)}/>
+          <Input type="text" inputClassName={styles.customInput} placeholder={"information about this Fund in 20 words"} id={"4"} name={"target"} onChangeAction={(e) => setinfo(e.target.value)}/>
           </div>
           <div>
           <Text>about:</Text>
-          <Input type="text" placeholder={"about"} id={"4"} name={"about"} onChangeAction={(e) => setabout(e.target.value)}/>
+          <Input type="text" inputClassName={styles.customInput} placeholder={"About this fund in 400 words"}  id={"4"} name={"about"} onChangeAction={(e) => setabout(e.target.value)}/>
           </div>
-          <div className={styles.button_login}>
-            <Button id="Login" type="submit"> Start</Button>
-            </div>
+          
         
         </div>
       </form>

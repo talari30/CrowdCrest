@@ -1,10 +1,12 @@
 'use client'
 import { Heading } from "@/elements/Heading";
+import { Button } from "@/elements/Button";
 import styles from "./Newfund.module.css";
 import { Text } from "@/elements/Text";
 import { Pageheader } from "@/modules/Pageheader";
 import { JSX, useState } from "react";
-import Nnew from "@/modules/Newfund_card"
+import Nnew from "@/modules/Newfund_card";
+import Bbank from "@/modules/bankdet_card";
 import { useRouter } from "next/navigation";
 
 export const Nnewfund = (): JSX.Element => {
@@ -14,6 +16,10 @@ export const Nnewfund = (): JSX.Element => {
     const [deadline, setdeadline] = useState("");
     const [info, setinfo] = useState("");
     const [about, setabout] = useState("");
+    const [Bank_name, setBank_name] = useState("");
+    const [Routing_Number, setRouting_Number] = useState("");
+    const [Account_Number, setAccount_Number] = useState("");
+    const [Billing_Address, setBilling_Address] = useState("");
     const handler= async () => {
         try {   
             const token = localStorage.getItem("token");           
@@ -46,7 +52,7 @@ export const Nnewfund = (): JSX.Element => {
           }
     };
   return (
-    <>
+    <form onSubmit={handler} >
       <Pageheader />
       <div >
         <Nnew
@@ -55,7 +61,6 @@ export const Nnewfund = (): JSX.Element => {
                   deadline={deadline}
                   info={info}
                   about={about} 
-                  onADD={handler}
                   setfund_name={setfund_name} 
                   setTarget={setTarget}
                   setdeadline={setdeadline}
@@ -63,7 +68,22 @@ export const Nnewfund = (): JSX.Element => {
                   setabout={setabout}
                   ></Nnew>
       </div>
-    </>
+      <div >
+        <Bbank    
+                  Bank_name={Bank_name}
+                  Routing_Number={Routing_Number}
+                  Account_Number={Account_Number}
+                  Billing_Address={Billing_Address}
+                  setBank_name={setBank_name}
+                  setRouting_Number={setRouting_Number}
+                  setAccount_Number={setAccount_Number}
+                  setBilling_Address={setBilling_Address}
+                  ></Bbank>
+      </div>
+      <div className={styles.button_start}>
+            <Button id="Login" type="submit"> Start</Button>
+        </div>
+    </form>
   );
 };
 

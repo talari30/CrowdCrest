@@ -61,7 +61,15 @@ public class AuthController {
 
         memberRepository.save(newMember);
 
-        return ResponseEntity.ok("User registered successfully");
+        String token = jwtUtil.generateToken(newMember.getEmail());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "User registration successful");
+        response.put("token", token);
+        response.put("memberId", newMember.getId());
+        
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")
