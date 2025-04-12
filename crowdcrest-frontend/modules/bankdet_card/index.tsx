@@ -37,20 +37,20 @@ const BBank = ({
   };
   
     return (
-      <form onSubmit={handleSubmit}  className={styles.Bank}>
+      <div className={styles.Bank}>
         <div className={styles.fundH}><Heading size={3} >Account details</Heading></div>
         <div >
             <div>
             <Text>Bank Name:</Text>
-            <Input type="text" placeholder={"Bank name"} id={"1"} name={"Bank_name"} onChangeAction={(e) => setBank_name(e.target.value)}/>
+            <Input type="text"placeholder={"Bank name"} id={"1"} name={"Bank_name"} onChangeAction={(e) => setBank_name(e.target.value)}/>
           </div>
           <div>
           <Text>Routing Number:</Text>
-          <Input type="number" placeholder={"Routing Number"} id={"2"} name={"Routing_Number"} onChangeAction={(e) =>  setRouting_Number(Number(e.target.value))}/>
+          <Input type="number"  placeholder={"Routing Number"} id={"2"} name={"Routing_Number"} onChangeAction={(e) =>  setRouting_Number(Number(e.target.value))}/>
           </div>
           <div>
           <Text>Account Number:</Text>
-          <Input type="number" placeholder={"Account Number Number"} id={"2"} name={"Account_Number"} onChangeAction={(e) =>  setAccount_Number(Number(e.target.value))}/>
+          <Input type="number"  placeholder={"Account Number Number"} id={"2"} name={"Account_Number"} onChangeAction={(e) =>  setAccount_Number(Number(e.target.value))}/>
           </div>
           <div>
           <Text>Billing Address:</Text>
@@ -58,7 +58,7 @@ const BBank = ({
           </div>
         
         </div>
-      </form>
+      </div>
     );
   };
 

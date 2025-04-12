@@ -20,8 +20,11 @@ export const Nnewfund = (): JSX.Element => {
     const [Routing_Number, setRouting_Number] = useState("");
     const [Account_Number, setAccount_Number] = useState("");
     const [Billing_Address, setBilling_Address] = useState("");
-    const handler= async () => {
+    const handler= async (e: React.FormEvent) => {
+      e.preventDefault();
+      alert(fund_name  );
         try {   
+            
             const token = localStorage.getItem("token");           
             const response = await fetch("http://localhost:8080/auth/newFund", {
               method: "POST",
@@ -30,11 +33,15 @@ export const Nnewfund = (): JSX.Element => {
             },
               body: JSON.stringify({
                 fundName: fund_name,
-                target,
-                deadline,
+                target: Number(target),
+                deadline, // assuming it's in yyyy-MM-dd format
                 info,
                 about,
-                organizerId: localStorage.getItem("memberId")
+                organizerId: Number(localStorage.getItem("memberId")),
+                bankName: Bank_name,
+                routingNumber: Routing_Number,
+                accountNumber: Account_Number,
+                billingAddress: Billing_Address
 
               }),
             });
@@ -48,7 +55,7 @@ export const Nnewfund = (): JSX.Element => {
             }
           } catch (err) {
             console.error("Error:", err);
-            alert("An error occurred during Login.");
+            alert("An error occurred during registration.");
           }
     };
   return (

@@ -16,4 +16,9 @@ public class NewFundRequest {
     private Member organizer;
     private String info;
     private String about;
+    private String bankName;
+    private String routingNumber;
+    private String accountNumber;
+    private String billingAddress;
+
 }

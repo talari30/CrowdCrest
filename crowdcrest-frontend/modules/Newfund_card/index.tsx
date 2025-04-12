@@ -41,7 +41,7 @@ const Nnew = ({
   };
   
     return (
-      <form onSubmit={handleSubmit}  className={styles.funding}>
+      <div className={styles.funding}>
         <div className={styles.fundH}><Heading size={3} >Start New Fund</Heading></div>
         <div >
             <div>
@@ -54,7 +54,7 @@ const Nnew = ({
           </div>
           <div>
           <Text>deadline:</Text>
-          <Input type="date" placeholder={"deadline"} id={"3"} name={"deadline"} onChangeAction={(e) => setdeadline(e.target.value)}/>
+          <Input type="date"  placeholder={"deadline"} id={"3"} name={"deadline"} onChangeAction={(e) => setdeadline(e.target.value)}/>
           </div>
           <div>
           <Text>info:</Text>
@@ -67,7 +67,7 @@ const Nnew = ({
           
         
         </div>
-      </form>
+      </div>
     );
   };
 

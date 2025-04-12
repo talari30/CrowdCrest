@@ -5,9 +5,11 @@ import com.crowdcrest.backend.dto.SignupRequest;
 import com.crowdcrest.backend.dto.LoginRequest;
 import com.crowdcrest.backend.dto.NewFundRequest;
 import com.crowdcrest.backend.entity.Donation;
+import com.crowdcrest.backend.entity.BankAccount;
 import com.crowdcrest.backend.entity.Member;
 import com.crowdcrest.backend.repository.DonationRepository;
 import com.crowdcrest.backend.repository.MemberRepository;
+import com.crowdcrest.backend.repository.BankAccountRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -67,7 +69,7 @@ public class AuthController {
         response.put("message", "User registration successful");
         response.put("token", token);
         response.put("memberId", newMember.getId());
-        
+
 
         return ResponseEntity.ok(response);
     }
@@ -124,6 +126,10 @@ public class AuthController {
 
         return ResponseEntity.ok(donationList);
     }
+
+    @Autowired
+    private BankAccountRepository bankAccountRepository;
+
     @Transactional
     @PostMapping("/newFund")
     public ResponseEntity<?> NewFund(@RequestBody NewFundRequest newfundrequest) {
@@ -134,18 +140,28 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Invalid organizer ID");
         }
 
-        // Create a new member entity and copy over the fields.
         Donation donation = new Donation();
         donation.setFundName(newfundrequest.getFundName());
         donation.setTarget(newfundrequest.getTarget());
         donation.setDeadline(newfundrequest.getDeadline());
         donation.setAbout(newfundrequest.getAbout());
         donation.setInfo(newfundrequest.getInfo());
-        donation.setOrganizer(organizer);  // set the actual Member object
+        donation.setOrganizer(organizer);
 
         donationRepository.save(donation);
 
-        return ResponseEntity.ok("Fund registered successfully");
+        BankAccount bankAccount = new BankAccount();
+        bankAccount.setBankName(newfundrequest.getBankName());
+        bankAccount.setRoutingNumber(newfundrequest.getRoutingNumber());
+        bankAccount.setAccountNumber(newfundrequest.getAccountNumber());
+        bankAccount.setBillingAddress(newfundrequest.getBillingAddress());
+        bankAccount.setDonation(donation);
+        bankAccount.setOrganizer(organizer);
+
+        bankAccountRepository.save(bankAccount);
+
+        return ResponseEntity.ok("Fund and bank details registered successfully");
     }
+
 }
 
