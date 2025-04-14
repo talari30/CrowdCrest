@@ -15,9 +15,11 @@ export default function Ffund() {
   const target = searchParams.get("target") || "0";
   const about = searchParams.get("about") || "";
   const deadline = searchParams.get("deadline") || "";
+  const backers = searchParams.get("backers") || "";
+  const Amount_recieved = searchParams.get("Amount_recieved") || "";
 
   return (
-    <div>
+    <div >
       <Pageheader />
       <div className={styles.container}>
         <Heading>{fundName}</Heading>
@@ -29,9 +31,9 @@ export default function Ffund() {
           </div>
           <div>
             <Text><strong>Target:</strong> {target}</Text>
-            <Text><strong>Backers:</strong> Coming soon</Text>
+            <Text><strong>Backers:</strong> {backers}</Text>
             <Text><strong>Deadline:</strong> {deadline}</Text>
-            <Text><strong>Amount Received:</strong> 0</Text>
+            <Text><strong>Amount Received:</strong> {Amount_recieved}</Text>
             <Text><strong>Amount Left:</strong> {target}</Text>
           </div>
         </div>

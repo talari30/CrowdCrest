@@ -1,15 +1,18 @@
 package com.crowdcrest.backend.controller;
 
 import com.crowdcrest.backend.Util.JwtUtil;
+import com.crowdcrest.backend.dto.NewTransaction;
 import com.crowdcrest.backend.dto.SignupRequest;
 import com.crowdcrest.backend.dto.LoginRequest;
 import com.crowdcrest.backend.dto.NewFundRequest;
 import com.crowdcrest.backend.entity.Donation;
 import com.crowdcrest.backend.entity.BankAccount;
 import com.crowdcrest.backend.entity.Member;
+import com.crowdcrest.backend.entity.Transaction;
 import com.crowdcrest.backend.repository.DonationRepository;
 import com.crowdcrest.backend.repository.MemberRepository;
 import com.crowdcrest.backend.repository.BankAccountRepository;
+import com.crowdcrest.backend.repository.TransactionsRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -111,6 +114,10 @@ public class AuthController {
                     ? member.getFirstName() + " " + member.getLastName()
                     : "Unknown";
 
+
+            Long backers = transactionsRepository.countDistinctBackersByDonationId(donation);
+            Double received = transactionsRepository.sumAmountByDonationId(donation);
+
             Map<String, Object> map = new HashMap<>();
             map.put("donationId", donation.getDonationId());
             map.put("fundName", donation.getFundName());
@@ -119,6 +126,8 @@ public class AuthController {
             map.put("about", donation.getAbout());
             map.put("info", donation.getInfo());
             map.put("organizerName", name);
+            map.put("backers", backers != null ? backers : 0);
+            map.put("amountReceived", received != null ? received : 0.0);
 
             return map;
         }).toList();
@@ -161,6 +170,29 @@ public class AuthController {
         bankAccountRepository.save(bankAccount);
 
         return ResponseEntity.ok("Fund and bank details registered successfully");
+    }
+
+    @Autowired
+    private TransactionsRepository transactionsRepository;
+
+
+    @Transactional
+    @PostMapping("/transactions")
+    public ResponseEntity<?> Transactions(@RequestBody NewTransaction newTransaction) {
+        Member payer = memberRepository.findById(newTransaction.getMember_id())
+                .orElse(null);
+        Donation don = donationRepository.findByDonationId(newTransaction.getDonation_id());
+
+        Transaction transaction = new Transaction();
+        transaction.setMember(payer);
+        transaction.setDonation(don);
+        transaction.setAmount(newTransaction.getAmount());
+        transaction.setTransaction_time(newTransaction.getTransaction_time());
+
+        transactionsRepository.save(transaction);
+
+
+        return ResponseEntity.ok("Transaction successful");
     }
 
 }

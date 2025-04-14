@@ -25,7 +25,7 @@ export const Ocard=(props: Ocardpropy): JSX.Element=>{
     const router = useRouter();
 
     const handleViewFund = () => {
-        router.push(`/Fund?donationId=${donationId}&fundName=${encodeURIComponent(name_of_organization)}&organizer=${encodeURIComponent(name_of_organizer)}&target=${Target}&about=${encodeURIComponent(about)}&deadline=${deadline}`);
+        router.push(`/Fund?donationId=${donationId}&fundName=${encodeURIComponent(name_of_organization)}&organizer=${encodeURIComponent(name_of_organizer)}&target=${Target}&about=${encodeURIComponent(about)}&deadline=${deadline}&backers=${members}&Amount_recieved=${Amount_recieved}`);
     };
     return (
         <div className={styles.Ocardbox}>

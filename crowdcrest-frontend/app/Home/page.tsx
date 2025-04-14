@@ -15,6 +15,8 @@ interface Donation {
       info: string;
       about:string;
       organizerName: string;
+      backers: number;
+      amountReceived: number;
 
     }
 
@@ -52,10 +54,10 @@ export const Hhome = () => {
             donationId={donation.donationId}
             name_of_organization={donation.fundName}
             name_of_organizer={donation.organizerName}
-            members={100}
+            members={donation.backers}
             Target={donation.target}
-            Amount_recieved={0} // You can replace this with actual data if available
-            Amount_left={donation.target} // Or calculate based on received
+            Amount_recieved={donation.amountReceived} // You can replace this with actual data if available
+            Amount_left={donation.target-donation.amountReceived} // Or calculate based on received
             deadline={donation.deadline}
             info={donation.info}
             about={donation.about}

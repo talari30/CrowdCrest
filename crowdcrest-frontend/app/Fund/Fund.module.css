@@ -1,5 +1,9 @@
 .funder{
+
     display:flex;
+}
+.container{
+   padding:20px;
 }
 .about{
    
