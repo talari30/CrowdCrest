@@ -1,42 +1,41 @@
 'use client'
 import { Heading } from "@/elements/Heading";
+import { Input } from "@/elements/Input";
 import { Button } from "@/elements/Button";
-import styles from "./Newfund.module.css";
+import styles from "./Donation.module.css";
 import { Text } from "@/elements/Text";
 import { Pageheader } from "@/modules/Pageheader";
 import { JSX, useState } from "react";
 import Nnew from "@/modules/Newfund_card";
 import Bbank from "@/modules/bankdet_card";
 import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
-export const Nnewfund = (): JSX.Element => {
+export const Donation = (): JSX.Element => {
     const router = useRouter();
-    const [fund_name, setfund_name] = useState("");
-    const [target, setTarget] = useState("");
-    const [deadline, setdeadline] = useState("");
-    const [info, setinfo] = useState("");
-    const [about, setabout] = useState("");
+    const searchParams = useSearchParams();
+    const [Donation_target, setDonation_target] = useState("");
     const [Bank_name, setBank_name] = useState("");
     const [Routing_Number, setRouting_Number] = useState("");
     const [Account_Number, setAccount_Number] = useState("");
     const [Billing_Address, setBilling_Address] = useState("");
+    const donationId = searchParams.get("donationId") || "";
     const handler= async (e: React.FormEvent) => {
       e.preventDefault();
+      alert(Number(localStorage.getItem("memberId")));
         try {   
             
             const token = localStorage.getItem("token");           
-            const response = await fetch("http://localhost:8080/auth/newFund", {
+            const response = await fetch("http://localhost:8080/auth/transactions", {
               method: "POST",
               headers: { "Content-Type": "application/json" ,
               "Authorization": `Bearer ${token}`,
             },
               body: JSON.stringify({
-                fundName: fund_name,
-                target: Number(target),
-                deadline, // assuming it's in yyyy-MM-dd format
-                info,
-                about,
-                organizerId: Number(localStorage.getItem("memberId")),
+                amount: Number(Donation_target),
+                member_id: Number(localStorage.getItem("memberId")),
+                transaction_time:new Date().toISOString(),
+                donation_id: donationId,
                 bankName: Bank_name,
                 routingNumber: Routing_Number,
                 accountNumber: Account_Number,
@@ -60,19 +59,9 @@ export const Nnewfund = (): JSX.Element => {
   return (
     <form onSubmit={handler} >
       <Pageheader />
-      <div >
-        <Nnew
-                  fund_name={fund_name}
-                  target={Number(target)}
-                  deadline={deadline}
-                  info={info}
-                  about={about} 
-                  setfund_name={setfund_name} 
-                  setTarget={setTarget}
-                  setdeadline={setdeadline}
-                  setinfo={setinfo}
-                  setabout={setabout}
-                  ></Nnew>
+      <div className={styles.amount}>
+        <Text>Enter the amount:</Text>
+        <Input id={"123"} name={"donationamount"} onChangeAction={(e) => setDonation_target(e.target.value)}/>
       </div>
       <div >
         <Bbank    
@@ -86,11 +75,11 @@ export const Nnewfund = (): JSX.Element => {
                   setBilling_Address={setBilling_Address}
                   ></Bbank>
       </div>
-      <div className={styles.button_start}>
-            <Button id="Login" type="submit"> Start</Button>
+      <div className={styles.button1}>
+            <Button id="Login" type="submit" > Donate</Button>
         </div>
     </form>
   );
 };
 
-export default Nnewfund;
+export default Donation;

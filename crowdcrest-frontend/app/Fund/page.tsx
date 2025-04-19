@@ -6,10 +6,12 @@ import styles from "./Fund.module.css";
 import { Button } from "@/elements/Button";
 import { Text } from "@/elements/Text";
 import { Heading } from "@/elements/Heading";
+import { useRouter } from "next/navigation";
 
 export default function Ffund() {
+  const router=useRouter();
   const searchParams = useSearchParams();
-
+  const donationId = searchParams.get("donationId") || "";
   const fundName = searchParams.get("fundName") || "";
   const organizerName = searchParams.get("organizer") || "";
   const target = searchParams.get("target") || "0";
@@ -17,8 +19,13 @@ export default function Ffund() {
   const deadline = searchParams.get("deadline") || "";
   const backers = searchParams.get("backers") || "";
   const Amount_recieved = searchParams.get("Amount_recieved") || "";
+  const handler = () => {
+    router.push(`/Donation?donationId=${donationId}`);
+  };
 
   return (
+    
+
     <div >
       <Pageheader />
       <div className={styles.container}>
@@ -39,7 +46,7 @@ export default function Ffund() {
         </div>
 
         <div className={styles.button}>
-          <Button id="helpus" type="button">Help Us!</Button>
+          <Button id="helpus" type="button" onClickAction={handler}>Help Us!</Button>
         </div>
       </div>
     </div>
