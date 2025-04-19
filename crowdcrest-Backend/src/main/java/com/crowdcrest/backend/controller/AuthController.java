@@ -15,6 +15,7 @@ import com.crowdcrest.backend.repository.BankAccountRepository;
 import com.crowdcrest.backend.repository.TransactionsRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,20 @@ public class AuthController {
 //    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
     @Autowired
     private JwtUtil jwtUtil;
+    @GetMapping("/validate")
+    public ResponseEntity<?> validateToken(@RequestHeader("Authorization") String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.badRequest().body("Missing or invalid Authorization header");
+        }
 
+        String token = authHeader.substring(7); // Remove "Bearer "
+
+        if (jwtUtil.validateToken(token)) {
+            return ResponseEntity.ok("Valid");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired token");
+        }
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignupRequest signupRequest) {
