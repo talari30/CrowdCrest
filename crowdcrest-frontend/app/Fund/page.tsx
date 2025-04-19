@@ -19,8 +19,9 @@ export default function Ffund() {
   const deadline = searchParams.get("deadline") || "";
   const backers = searchParams.get("backers") || "";
   const Amount_recieved = searchParams.get("Amount_recieved") || "";
+  const AmountLeft= Number(target)-Number(Amount_recieved);
   const handler = () => {
-    router.push(`/Donation?donationId=${donationId}`);
+    router.push(`/Donation?donationId=${donationId}&AmountLeft=${AmountLeft}`);
   };
 
   return (

@@ -20,10 +20,15 @@ export const Donation = (): JSX.Element => {
     const [Account_Number, setAccount_Number] = useState("");
     const [Billing_Address, setBilling_Address] = useState("");
     const donationId = searchParams.get("donationId") || "";
+    const AmountLeft=searchParams.get("AmountLeft") || "";
     const handler= async (e: React.FormEvent) => {
       e.preventDefault();
-      alert(Number(localStorage.getItem("memberId")));
         try {   
+            console.log("AmountRecieved:", Number(AmountLeft));
+            if(Number(AmountLeft) < Number(Donation_target)){
+                alert(`Error: Amount should be less than ${AmountLeft}`);
+                return;
+            }
             
             const token = localStorage.getItem("token");           
             const response = await fetch("http://localhost:8080/auth/transactions", {
