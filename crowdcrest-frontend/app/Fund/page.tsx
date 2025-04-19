@@ -7,6 +7,8 @@ import { Button } from "@/elements/Button";
 import { Text } from "@/elements/Text";
 import { Heading } from "@/elements/Heading";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { Jwt_Validation } from "@/Helper/JWTValidation";
 
 export default function Ffund() {
   const router=useRouter();
@@ -23,11 +25,11 @@ export default function Ffund() {
   const handler = () => {
     router.push(`/Donation?donationId=${donationId}&AmountLeft=${AmountLeft}`);
   };
-
   return (
     
 
     <div >
+      <Jwt_Validation/>
       <Pageheader />
       <div className={styles.container}>
         <Heading>{fundName}</Heading>

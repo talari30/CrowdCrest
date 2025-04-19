@@ -1,3 +1,4 @@
+'use client'
 import LoginProps from "@/modules/logincard";
 import {Pageheader} from "@/modules/Pageheader";
 import styles from "./contactus.module.css";
@@ -6,12 +7,16 @@ import phoneImg from "@/assets/Phoneimg.png";
 import mailImg from "@/assets/Mailimg.png";
 import Image from "next/image";
 import {Ocard} from "@/modules/Organization_card";
-
+import { useEffect } from "react";
+import {useRouter} from "next/navigation";
+import { Jwt_Validation } from "@/Helper/JWTValidation";
 
 
 export const CContactus = () => {
+  
         return (
                 <>
+                <Jwt_Validation/>
           <div >
          
               <div>

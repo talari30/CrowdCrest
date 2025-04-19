@@ -4,6 +4,7 @@ import {Pageheader} from "@/modules/Pageheader";
 import styles from "./Signup.module.css";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import{Jwt_Validation_signer} from "@/Helper/JWTValidation";
 
 export const SSignup=  ()=>{
         const router = useRouter();
@@ -51,6 +52,7 @@ export const SSignup=  ()=>{
           
         return (
             <div className={styles.container}>
+              <Jwt_Validation_signer/>
         <><div>
                         <Pageheader />
                 </div><div className={styles.SSignup}>

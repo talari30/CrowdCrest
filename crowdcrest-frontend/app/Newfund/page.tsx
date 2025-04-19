@@ -4,12 +4,14 @@ import { Button } from "@/elements/Button";
 import styles from "./Newfund.module.css";
 import { Text } from "@/elements/Text";
 import { Pageheader } from "@/modules/Pageheader";
-import { JSX, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import Nnew from "@/modules/Newfund_card";
 import Bbank from "@/modules/bankdet_card";
 import { useRouter } from "next/navigation";
+import { Jwt_Validation } from "@/Helper/JWTValidation";
 
 export const Nnewfund = (): JSX.Element => {
+    
     const router = useRouter();
     const [fund_name, setfund_name] = useState("");
     const [target, setTarget] = useState("");
@@ -20,6 +22,36 @@ export const Nnewfund = (): JSX.Element => {
     const [Routing_Number, setRouting_Number] = useState("");
     const [Account_Number, setAccount_Number] = useState("");
     const [Billing_Address, setBilling_Address] = useState("");
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+  
+      if (!token) {
+        router.push("/login");
+        return;
+      }
+  
+      fetch("http://localhost:8080/auth/validate", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          
+        } else {
+          localStorage.removeItem("token");
+          router.push("/login"); 
+          return;
+        }
+      })
+      .catch(() => {
+        localStorage.removeItem("token");
+        router.push("/login");
+        return;
+      });
+  
+    }, []);
     const handler= async (e: React.FormEvent) => {
       e.preventDefault();
         try {   
@@ -59,6 +91,7 @@ export const Nnewfund = (): JSX.Element => {
     };
   return (
     <form onSubmit={handler} >
+      <Jwt_Validation/>
       <Pageheader />
       <div >
         <Nnew

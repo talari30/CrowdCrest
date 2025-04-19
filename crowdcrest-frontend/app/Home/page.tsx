@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import {Button} from "@/elements/Button"
 import { useRouter } from "next/navigation";
+import { Jwt_Validation } from "@/Helper/JWTValidation";
 
 interface Donation {
       donationId: number;
@@ -22,9 +23,11 @@ interface Donation {
 
 
 export const Hhome = () => {
+     
       const router= useRouter();
       const [donations, setDonations] = useState<Donation[]>([]);
       useEffect(() => {
+            
             axios.get("http://localhost:8080/auth/home")
               .then(response => {
                 setDonations(response.data);
@@ -40,6 +43,7 @@ export const Hhome = () => {
 
         return (
             <>
+            <Jwt_Validation/>
             <div>
               <Pageheader />
               

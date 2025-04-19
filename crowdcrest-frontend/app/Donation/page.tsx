@@ -5,13 +5,15 @@ import { Button } from "@/elements/Button";
 import styles from "./Donation.module.css";
 import { Text } from "@/elements/Text";
 import { Pageheader } from "@/modules/Pageheader";
-import { JSX, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import Nnew from "@/modules/Newfund_card";
 import Bbank from "@/modules/bankdet_card";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
+import { Jwt_Validation } from "@/Helper/JWTValidation";
 
 export const Donation = (): JSX.Element => {
+    Jwt_Validation();
     const router = useRouter();
     const searchParams = useSearchParams();
     const [Donation_target, setDonation_target] = useState("");
@@ -63,6 +65,7 @@ export const Donation = (): JSX.Element => {
     };
   return (
     <form onSubmit={handler} >
+        <Jwt_Validation/>
       <Pageheader />
       <div className={styles.amount}>
         <Text>Enter the amount:</Text>

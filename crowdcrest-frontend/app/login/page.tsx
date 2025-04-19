@@ -4,9 +4,11 @@ import {Pageheader} from "@/modules/Pageheader";
 import styles from "./login.module.css";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import{Jwt_Validation_homer} from "@/Helper/JWTValidation";
 
 
 export const login=  ()=>{
+        Jwt_Validation_homer();
         const router = useRouter();
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");
@@ -40,6 +42,7 @@ export const login=  ()=>{
               
         return (
             <div className={styles.container}>
+              <Jwt_Validation_homer />
         <><div>
                         <Pageheader />
                 </div><div className={styles.login1}>

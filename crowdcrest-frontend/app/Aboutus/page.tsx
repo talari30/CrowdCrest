@@ -3,10 +3,13 @@ import styles from "./Aboutus.module.css";
 import { Text } from "@/elements/Text";
 import { Pageheader } from "@/modules/Pageheader";
 import { JSX } from "react";
+import { Jwt_Validation } from "@/Helper/JWTValidation";
 
 export const AAboutus = (): JSX.Element => {
+
   return (
     <>
+    <Jwt_Validation/>
       <Pageheader />
       <div className={styles.head}>
         <Heading>About US</Heading>
