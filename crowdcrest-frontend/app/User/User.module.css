@@ -1,0 +1,13 @@
+.Logout{
+    border: 1px solid black;
+    
+}
+.Logout:hover {
+   
+    background-color: grey; 
+    color: #000; 
+  }
+.button1{
+    display: flex;
+    justify-content: center;
+}
