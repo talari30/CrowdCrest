@@ -1,12 +1,7 @@
 package com.crowdcrest.backend.controller;
 
 import com.crowdcrest.backend.Util.JwtUtil;
-import com.crowdcrest.backend.dto.NewTransaction;
-import com.crowdcrest.backend.dto.SignupRequest;
-import com.crowdcrest.backend.dto.LoginRequest;
-import com.crowdcrest.backend.dto.NewFundRequest;
-import com.crowdcrest.backend.dto.FundDTO;
-import com.crowdcrest.backend.dto.DonationDTO;
+import com.crowdcrest.backend.dto.*;
 import com.crowdcrest.backend.entity.Donation;
 import com.crowdcrest.backend.entity.BankAccount;
 import com.crowdcrest.backend.entity.Member;
@@ -250,6 +245,8 @@ public class AuthController {
         }).toList();
 
         Map<String, Object> response = new HashMap<>();
+        MemberDTO memberDTO = new MemberDTO(member);
+        response.put("Member", memberDTO);
         response.put("startedFunds", fundDTOs);
         response.put("donationsMade", donationDTOs);
 

@@ -26,7 +26,6 @@ const DonationsTable = ({ donations }: DonationsProps): JSX.Element => {
           <tr>
             <th>Fund Name</th>
             <th>Organizer</th>
-            <th>Target</th>
             <th>Amount Donated</th>
             <th>Backers</th>
             <th>Date</th>
@@ -37,7 +36,6 @@ const DonationsTable = ({ donations }: DonationsProps): JSX.Element => {
             <tr key={donation.transactionId}>
               <td>{donation.fundName}</td>
               <td>{donation.organizerFirstName} {donation.organizerFirstName}</td>
-              <td>${donation.target}</td>
               <td>${donation.amount}</td>
               <td>{donation.backers}</td>
               <td>{new Date(donation.transactionTime).toLocaleString()}</td>

@@ -9,6 +9,7 @@ import { Jwt_Validation } from "@/Helper/JWTValidation";
 import {useRouter} from "next/navigation";
 import FundTable from "@/modules/Fund_table";
 import DonationsTable from "@/modules/Donations_table";
+import MemberDetails from "@/modules/MemberDetails";
 
 
 interface Fund {
@@ -30,7 +31,14 @@ interface Fund {
     amount: number;
     backers: number;
   }
-
+  interface Member {
+    firstName: string;
+    lastName: string;
+    email: string;
+    age: number;
+    address: string;
+    phoneNumber: string;
+  }
 export const AAboutus = (): JSX.Element => {
     const router=useRouter();
     const handler=()=>{
@@ -41,6 +49,8 @@ export const AAboutus = (): JSX.Element => {
 
     const [createdFunds, setCreatedFunds] = useState<Fund[]>([]);
     const [madeDonations, setMadeDonations] = useState<Donations[]>([]);
+    const [member, setMember] = useState<Member | null>(null);
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         const memberId = localStorage.getItem("memberId");
@@ -54,6 +64,7 @@ export const AAboutus = (): JSX.Element => {
           })
           .then(res => res.json())
           .then(data => {
+            setMember(data.Member);
             setCreatedFunds(data.startedFunds);
             setMadeDonations(data.donationsMade);
             console.log("Funds Started", data.startedFunds);
@@ -69,6 +80,7 @@ export const AAboutus = (): JSX.Element => {
     <Jwt_Validation/>
       <Pageheader />
       <div className={styles.page}>
+      {member && <MemberDetails member={member} />}
       <div className={styles.head}>
         <FundTable funds={createdFunds} />
         </div>
