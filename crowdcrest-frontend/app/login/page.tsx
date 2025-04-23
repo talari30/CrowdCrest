@@ -8,7 +8,7 @@ import{Jwt_Validation_homer} from "@/Helper/JWTValidation";
 
 
 export const login=  ()=>{
-        Jwt_Validation_homer();
+      
         const router = useRouter();
         const [email, setEmail] = useState("");
         const [password, setPassword] = useState("");

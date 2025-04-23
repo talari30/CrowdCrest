@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -208,6 +209,29 @@ public class AuthController {
 
         return ResponseEntity.ok("Transaction successful");
     }
+    @GetMapping("/member/{memberId}/donations")
+    public ResponseEntity<?> getMemberDetails(@PathVariable Long memberId) {
+        Optional<Member> memberOpt = memberRepository.findById(memberId);
+
+        if (memberOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("Member not found");
+        }
+
+        Member member = memberOpt.get();
+
+        // Funds started by the member
+        List<Donation> startedFunds = donationRepository.findByOrganizer(member);
+
+        // Transactions made by the member
+        List<Transaction> donationsMade = transactionsRepository.findByMemberId(memberId);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("startedFunds", startedFunds);
+        response.put("donationsMade", donationsMade);
+
+        return ResponseEntity.ok(response);
+    }
+
 
 }
 
