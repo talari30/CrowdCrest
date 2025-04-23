@@ -1,13 +1,18 @@
 .Logout{
     border: 1px solid black;
+    padding:3px;
+    border-radius: 5px;
     
 }
 .Logout:hover {
    
-    background-color: grey; 
+    background-color: rgb(171, 168, 168); 
     color: #000; 
   }
 .button1{
     display: flex;
     justify-content: center;
+}
+.page{
+    padding: 30px;
 }

@@ -5,6 +5,8 @@ import com.crowdcrest.backend.dto.NewTransaction;
 import com.crowdcrest.backend.dto.SignupRequest;
 import com.crowdcrest.backend.dto.LoginRequest;
 import com.crowdcrest.backend.dto.NewFundRequest;
+import com.crowdcrest.backend.dto.FundDTO;
+import com.crowdcrest.backend.dto.DonationDTO;
 import com.crowdcrest.backend.entity.Donation;
 import com.crowdcrest.backend.entity.BankAccount;
 import com.crowdcrest.backend.entity.Member;
@@ -212,7 +214,6 @@ public class AuthController {
     @GetMapping("/member/{memberId}/donations")
     public ResponseEntity<?> getMemberDetails(@PathVariable Long memberId) {
         Optional<Member> memberOpt = memberRepository.findById(memberId);
-
         if (memberOpt.isEmpty()) {
             return ResponseEntity.badRequest().body("Member not found");
         }
@@ -221,13 +222,36 @@ public class AuthController {
 
         // Funds started by the member
         List<Donation> startedFunds = donationRepository.findByOrganizer(member);
+        List<FundDTO> fundDTOs = startedFunds.stream().map(donation -> {
+            FundDTO dto = new FundDTO();
+            dto.setDonationId(donation.getDonationId());
+            dto.setFundName(donation.getFundName());
+            dto.setTarget(donation.getTarget());
+            dto.setDeadline(donation.getDeadline());
+            dto.setAmountReceived(transactionsRepository.sumAmountByDonationId(donation));
+            dto.setBackers(transactionsRepository.countDistinctBackersByDonationId(donation));
+            return dto;
+        }).toList();
 
-        // Transactions made by the member
+        // Donations made by member
         List<Transaction> donationsMade = transactionsRepository.findByMemberId(memberId);
+        List<DonationDTO> donationDTOs = donationsMade.stream().map(tx -> {
+            DonationDTO dto = new DonationDTO();
+            dto.setTransactionId(tx.getTransaction_id());
+            dto.setOrganizerId(tx.getDonation().getOrganizer().getId());
+            dto.setOrganizerFirstName(tx.getDonation().getOrganizer().getFirstName());
+            dto.setOrganizerLastName(tx.getDonation().getOrganizer().getLastName());
+            dto.setFundName(tx.getDonation().getFundName());
+            dto.setTarget(tx.getDonation().getTarget());
+            dto.setTransactionTime(tx.getTransaction_time());
+            dto.setAmount(tx.getAmount());
+            dto.setBackers(transactionsRepository.countDistinctBackersByDonationId(tx.getDonation()));
+            return dto;
+        }).toList();
 
         Map<String, Object> response = new HashMap<>();
-        response.put("startedFunds", startedFunds);
-        response.put("donationsMade", donationsMade);
+        response.put("startedFunds", fundDTOs);
+        response.put("donationsMade", donationDTOs);
 
         return ResponseEntity.ok(response);
     }

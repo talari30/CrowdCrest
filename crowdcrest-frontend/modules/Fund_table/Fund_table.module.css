@@ -1,0 +1,49 @@
+.fundTableContainer {
+    padding: 2rem;
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .fundTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.95rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+  
+  .fundTable thead {
+    background-color: #f1f5f9;
+    text-align: left;
+  }
+  
+  .fundTable th,
+  .fundTable td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .fundTable th {
+    color: #1e293b;
+    font-weight: 600;
+  }
+  
+  .fundTable tr:nth-child(even) {
+    background-color: #f9fafb;
+  }
+  
+  .fundTable tr:hover {
+    background-color: #eef2f7;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .fundTable th,
+    .fundTable td {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+  }
+  
